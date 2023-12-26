@@ -1,15 +1,31 @@
 #include <sort/sort.h>
 #include <iostream>
 #include <vector>
-
+#include <random>
+#include <fstream>
 
 using namespace sort;
 using namespace std;
 
 int main() {
-	vector<int> a{ 31, 2, 30, 18, 34, 17, 30, 9, 30, 11, 4, 14, 29, 5, 21, 15, 17, 35, 37, 26, 38, 30, 40, 17, 29, 21, 7, 19, 38, 16 };
-	stats b = shell_sort(a);
+	//insert_sort
+	//shell_sort
+	//pyramid_sort
+
+
+	vector<stats> a = sort_hundred_ordered_vectors(1);
+	//vector<stats> a = sort_hundred_ordered_vectors(2);
+	//vector<stats> a = sort_hundred_ordered_vectors(3);
+	// 
+	//vector<stats> a = sort_hundred_random_vectors(1);
+	//vector<stats> a = sort_hundred_random_vectors(2);
+	//vector<stats> a = sort_hundred_random_vectors(3);
+	// 
+	//vector<stats> a = sort_hundred_reversed_ordered_vectors(1);
+	//vector<stats> a = sort_hundred_reversed_ordered_vectors(2);
+	//vector<stats> a = sort_hundred_reversed_ordered_vectors(3);
 	cout << a;
-	cout << b;
+	string name = "ordered_insert_sort.txt";
+	write_to_file(a, "ordered_insert_sort.txt");
 	return 0;
 }

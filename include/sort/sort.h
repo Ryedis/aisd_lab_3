@@ -20,6 +20,16 @@ namespace sort {
 			copy_count = other.copy_count;
 			return *this;
 		}
+		stats& operator+=(const stats& other) {
+			comparison_count += other.comparison_count;
+			copy_count += other.copy_count;
+			return *this;
+		}
+		stats& operator/(const int other) {
+			comparison_count /= other;
+			copy_count /= other;
+			return *this;
+		}
 	};
 
 	stats insert_sort(vector<int>& arr) {
@@ -101,9 +111,198 @@ namespace sort {
 		return os;
 	}
 
+	ostream& operator<<(ostream& os, const vector<stats>& stats_vec) {
+		for (const stats& description : stats_vec) {
+			os << description << endl;
+		}
+		return os;
+	}
 
+	vector<int> ordered_vector(int n) {
+		vector<int> vector;
+		for (int i = 1; i <= n; i++) {
+			vector.push_back(i);
+		}
+		return vector;
+	}
+	vector<int> reversed_ordered_vector(int n) {
+		vector<int> vector;
+		for (int i = n; i > 0; i--) {
+			vector.push_back(i);
+		}
+		return vector;
+	}
 
+	vector<int> random_seed(int a, int b, int n, int seed) {
+		vector<int> res;
+		mt19937 generator(seed);
+		uniform_int_distribution<> distribution(a, b);
+		for (int i = 0; i < n; i++) {
+			int x = distribution(generator);
+			res.push_back(x);
+		}
+		return res;
+	}
 
+	stats sort_random_vector(int length_vector, int trial_count, int sort) {
+		stats stat;
+		for (int i = 0; i < trial_count; i++) {
+			std::vector<int> test = random_seed(-1000, 1000, length_vector, i + 1);
+			cout << "iteration: " << i << endl;
+			switch (sort) {
+			case 1:
+				stat += insert_sort(test);
+				break;
+			case 2:
+				stat += shell_sort(test);
+				break;
+			case 3:
+				stat += pyramid_sort(test);
+				break;
+			}
+		}
+		stat = stat / trial_count;
+		return stat;
+	}
+	vector<stats> sort_hundred_random_vectors(int sort_choice) {
+		vector<stats> stat;
+		for (int i = 1; i < 11; i++) {
+			cout << "len: " << i * 1000 << endl;
+			stat.push_back(sort_random_vector(i * 1000, 100, sort_choice));
+		}
+		cout << "len: " << 25000 << endl;
+		stat.push_back(sort_random_vector(25000, 100, sort_choice));
+		cout << "len: " << 50000 << endl;
+		stat.push_back(sort_random_vector(50000, 100, sort_choice));
+		cout << "len: " << 100000 << endl;
+		stat.push_back(sort_random_vector(100000, 100, sort_choice));
+		return stat;
+	}
+	vector<stats> sort_hundred_ordered_vectors(int sort_choice) {
+		vector<stats> stat;
+		for (int i = 1; i < 11; i++) {
+			cout << "len: " << i * 1000 << endl;
+			vector<int> a = ordered_vector(i * 1000);
+			switch (sort_choice) {
+			case 1:
+				stat.push_back(insert_sort(a));
+				break;
+			case 2:
+				stat.push_back(shell_sort(a));
+				break;
+			case 3:
+				stat.push_back(pyramid_sort(a));
+				break;
+			}
+		}
+		cout << "len: " << 25000 << endl;
+		vector<int> a = ordered_vector(25000);
+		switch (sort_choice) {
+		case 1:
+			stat.push_back(insert_sort(a));
+			break;
+		case 2:
+			stat.push_back(shell_sort(a));
+			break;
+		case 3:
+			stat.push_back(pyramid_sort(a));
+			break;
+		}
+		cout << "len: " << 50000 << endl;
+		vector<int> b = ordered_vector(50000);
+		switch (sort_choice) {
+		case 1:
+			stat.push_back(insert_sort(b));
+			break;
+		case 2:
+			stat.push_back(shell_sort(b));
+			break;
+		case 3:
+			stat.push_back(pyramid_sort(b));
+			break;
+		}
+		cout << "len: " << 100000 << endl;
+		vector<int> c = ordered_vector(100000);
+		switch (sort_choice) {
+		case 1:
+			stat.push_back(insert_sort(c));
+			break;
+		case 2:
+			stat.push_back(shell_sort(c));
+			break;
+		case 3:
+			stat.push_back(pyramid_sort(c));
+			break;
+		}
+		return stat;
+	}
+	vector<stats> sort_hundred_reversed_ordered_vectors(int sort_choice) {
+		vector<stats> stat;
+		for (int i = 1; i < 11; i++) {
+			cout << "len: " << i * 1000 << endl;
+			vector<int> a = reversed_ordered_vector(i * 1000);
+			switch (sort_choice) {
+			case 1:
+				stat.push_back(insert_sort(a));
+				break;
+			case 2:
+				stat.push_back(shell_sort(a));
+				break;
+			case 3:
+				stat.push_back(pyramid_sort(a));
+				break;
+			}
+		}
+		cout << "len: " << 25000 << endl;
+		vector<int> a = reversed_ordered_vector(25000);
+		switch (sort_choice) {
+		case 1:
+			stat.push_back(insert_sort(a));
+			break;
+		case 2:
+			stat.push_back(shell_sort(a));
+			break;
+		case 3:
+			stat.push_back(pyramid_sort(a));
+			break;
+		}
+		cout << "len: " << 50000 << endl;
+		vector<int> b = reversed_ordered_vector(50000);
+		switch (sort_choice) {
+		case 1:
+			stat.push_back(insert_sort(b));
+			break;
+		case 2:
+			stat.push_back(shell_sort(b));
+			break;
+		case 3:
+			stat.push_back(pyramid_sort(b));
+			break;
+		}
+		cout << "len: " << 100000 << endl;
+		vector<int> c = reversed_ordered_vector(100000);
+		switch (sort_choice) {
+		case 1:
+			stat.push_back(insert_sort(c));
+			break;
+		case 2:
+			stat.push_back(shell_sort(c));
+			break;
+		case 3:
+			stat.push_back(pyramid_sort(c));
+			break;
+		}
+		return stat;
+	}
+	void write_to_file(const vector<stats>& stat, const string& name) {
+		ofstream out;
+		string path = "C:/papka/aisd_lab_3/sort_res/";
+		out.open(path + name);
+		for (int i = 0; i < stat.size(); i++) {
+			out << stat[i].comparison_count << " " << stat[i].copy_count << endl;
+		}
+		out.close();
+	}
 
 
 
