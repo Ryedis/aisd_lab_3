@@ -13,19 +13,18 @@ int main() {
 	//pyramid_sort
 
 
-	vector<stats> a = sort_hundred_ordered_vectors(1);
+	//vector<stats> a = sort_hundred_ordered_vectors(1);
 	//vector<stats> a = sort_hundred_ordered_vectors(2);
 	//vector<stats> a = sort_hundred_ordered_vectors(3);
-	// 
+	
 	//vector<stats> a = sort_hundred_random_vectors(1);
 	//vector<stats> a = sort_hundred_random_vectors(2);
 	//vector<stats> a = sort_hundred_random_vectors(3);
-	// 
+	 
 	//vector<stats> a = sort_hundred_reversed_ordered_vectors(1);
 	//vector<stats> a = sort_hundred_reversed_ordered_vectors(2);
-	//vector<stats> a = sort_hundred_reversed_ordered_vectors(3);
+	vector<stats> a = sort_hundred_reversed_ordered_vectors(3);
 	cout << a;
-	string name = "ordered_insert_sort.txt";
-	write_to_file(a, "ordered_insert_sort.txt");
+	write_to_file(a, "reversed_ordered_insert_sort.txt");
 	return 0;
 }

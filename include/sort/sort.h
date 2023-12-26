@@ -164,26 +164,26 @@ namespace sort {
 		stat = stat / trial_count;
 		return stat;
 	}
-	vector<stats> sort_hundred_random_vectors(int sort_choice) {
+
+	vector<stats> sort_hundred_random_vectors(int sort) {
 		vector<stats> stat;
 		for (int i = 1; i < 11; i++) {
 			cout << "len: " << i * 1000 << endl;
-			stat.push_back(sort_random_vector(i * 1000, 100, sort_choice));
+			stat.push_back(sort_random_vector(i * 1000, 100, sort));
 		}
-		cout << "len: " << 25000 << endl;
-		stat.push_back(sort_random_vector(25000, 100, sort_choice));
-		cout << "len: " << 50000 << endl;
-		stat.push_back(sort_random_vector(50000, 100, sort_choice));
-		cout << "len: " << 100000 << endl;
-		stat.push_back(sort_random_vector(100000, 100, sort_choice));
+		for (int i = 25000; i < 100001; i *= 2) {
+			cout << "len: " << i << endl;
+			stat.push_back(sort_random_vector(i, 100, sort));
+		}
 		return stat;
 	}
-	vector<stats> sort_hundred_ordered_vectors(int sort_choice) {
+
+	vector<stats> sort_hundred_ordered_vectors(int sort) {
 		vector<stats> stat;
 		for (int i = 1; i < 11; i++) {
 			cout << "len: " << i * 1000 << endl;
 			vector<int> a = ordered_vector(i * 1000);
-			switch (sort_choice) {
+			switch (sort) {
 			case 1:
 				stat.push_back(insert_sort(a));
 				break;
@@ -195,53 +195,31 @@ namespace sort {
 				break;
 			}
 		}
-		cout << "len: " << 25000 << endl;
-		vector<int> a = ordered_vector(25000);
-		switch (sort_choice) {
-		case 1:
-			stat.push_back(insert_sort(a));
-			break;
-		case 2:
-			stat.push_back(shell_sort(a));
-			break;
-		case 3:
-			stat.push_back(pyramid_sort(a));
-			break;
-		}
-		cout << "len: " << 50000 << endl;
-		vector<int> b = ordered_vector(50000);
-		switch (sort_choice) {
-		case 1:
-			stat.push_back(insert_sort(b));
-			break;
-		case 2:
-			stat.push_back(shell_sort(b));
-			break;
-		case 3:
-			stat.push_back(pyramid_sort(b));
-			break;
-		}
-		cout << "len: " << 100000 << endl;
-		vector<int> c = ordered_vector(100000);
-		switch (sort_choice) {
-		case 1:
-			stat.push_back(insert_sort(c));
-			break;
-		case 2:
-			stat.push_back(shell_sort(c));
-			break;
-		case 3:
-			stat.push_back(pyramid_sort(c));
-			break;
+
+		for (int i = 25000; i < 100001; i *= 2) {
+			cout << "len: " << i << endl;
+			vector<int> a = ordered_vector(i);
+			switch (sort) {
+			case 1:
+				stat.push_back(insert_sort(a));
+				break;
+			case 2:
+				stat.push_back(shell_sort(a));
+				break;
+			case 3:
+				stat.push_back(pyramid_sort(a));
+				break;
+			}
 		}
 		return stat;
 	}
-	vector<stats> sort_hundred_reversed_ordered_vectors(int sort_choice) {
+
+	vector<stats> sort_hundred_reversed_ordered_vectors(int sort) {
 		vector<stats> stat;
 		for (int i = 1; i < 11; i++) {
 			cout << "len: " << i * 1000 << endl;
 			vector<int> a = reversed_ordered_vector(i * 1000);
-			switch (sort_choice) {
+			switch (sort) {
 			case 1:
 				stat.push_back(insert_sort(a));
 				break;
@@ -253,44 +231,21 @@ namespace sort {
 				break;
 			}
 		}
-		cout << "len: " << 25000 << endl;
-		vector<int> a = reversed_ordered_vector(25000);
-		switch (sort_choice) {
-		case 1:
-			stat.push_back(insert_sort(a));
-			break;
-		case 2:
-			stat.push_back(shell_sort(a));
-			break;
-		case 3:
-			stat.push_back(pyramid_sort(a));
-			break;
-		}
-		cout << "len: " << 50000 << endl;
-		vector<int> b = reversed_ordered_vector(50000);
-		switch (sort_choice) {
-		case 1:
-			stat.push_back(insert_sort(b));
-			break;
-		case 2:
-			stat.push_back(shell_sort(b));
-			break;
-		case 3:
-			stat.push_back(pyramid_sort(b));
-			break;
-		}
-		cout << "len: " << 100000 << endl;
-		vector<int> c = reversed_ordered_vector(100000);
-		switch (sort_choice) {
-		case 1:
-			stat.push_back(insert_sort(c));
-			break;
-		case 2:
-			stat.push_back(shell_sort(c));
-			break;
-		case 3:
-			stat.push_back(pyramid_sort(c));
-			break;
+
+		for (int i = 25000; i < 100001; i *= 2) {
+			cout << "len: " << i << endl;
+			vector<int> a = reversed_ordered_vector(i);
+			switch (sort) {
+			case 1:
+				stat.push_back(insert_sort(a));
+				break;
+			case 2:
+				stat.push_back(shell_sort(a));
+				break;
+			case 3:
+				stat.push_back(pyramid_sort(a));
+				break;
+			}
 		}
 		return stat;
 	}
